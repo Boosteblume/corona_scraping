@@ -29,15 +29,19 @@ def choose_city():
 answered_city = choose_city()
 
 print("You choose " + answered_city)
-get_the_document()
+print("")
+print(dict_of_cities[answered_city])
+print("")
 
 #open the url and scrape for the 7-days-incidenc
-def ():
+def get_urlcontent():
     url = dict_of_cities[answered_city]
-    session = HTMLSession()
-    url_session = session.get(url)
-    
-    if url_session.html.find("p.card-text") == "Neuinfektionen (7-Tage-Inzidenz) ":
-        Neuinfektionen = url_session.html.find()
+    url_content = requests.get(url).text
+    soup = BeautifulSoup(url_content, "html.parser")
 
-#beautifulsoup find all 
+
+    list_of_numbers = soup.find_all("p", class_="card-title")[3].text
+    #returns a list of all card-title of the website and i want value no.4
+    return list_of_numbers
+
+print(get_urlcontent())
